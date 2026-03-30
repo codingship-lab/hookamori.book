@@ -1,0 +1,914 @@
+.scene {
+  min-height: 100dvh;
+  position: relative;
+  overflow: clip;
+  background:
+    radial-gradient(circle at top, rgba(255, 247, 226, 0.9), transparent 40%),
+    radial-gradient(circle at bottom right, rgba(111, 69, 34, 0.35), transparent 38%),
+    linear-gradient(135deg, #4d2b18 0%, #7a4b2a 28%, #6c4426 58%, #3a2114 100%);
+}
+
+.scene::before,
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scene::before {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.02) 0,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 22px
+    );
+  opacity: 0.35;
+}
+
+.scene::after {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1), transparent 22%),
+    radial-gradient(circle at 80% 15%, rgba(255, 255, 255, 0.08), transparent 18%),
+    radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.18), transparent 35%);
+  mix-blend-mode: soft-light;
+}
+
+.skipLink {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 30;
+  transform: translateY(-160%);
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  background: #fffef8;
+  color: #1c120c;
+  box-shadow: 0 1rem 2rem rgba(26, 13, 6, 0.2);
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.skipLink:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid #3f2a1a;
+  outline-offset: 3px;
+}
+
+.stage {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding:
+    max(1.5rem, env(safe-area-inset-top))
+    max(1rem, env(safe-area-inset-right))
+    max(1.5rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+}
+
+.book {
+  position: relative;
+  width: min(1120px, 100%);
+  min-height: min(860px, calc(100dvh - 2rem));
+  display: grid;
+  place-items: center;
+  border-radius: 36px;
+  padding: 3rem 5.5rem;
+  background:
+    linear-gradient(90deg, rgba(43, 24, 13, 0.35), rgba(160, 110, 63, 0.08) 15%, transparent 30%),
+    linear-gradient(180deg, #6a4326 0%, #8f6038 48%, #5a361f 100%);
+  box-shadow:
+    0 30px 70px rgba(20, 10, 5, 0.45),
+    inset 0 0 0 1px rgba(255, 247, 226, 0.08),
+    inset 0 0 40px rgba(27, 13, 6, 0.28);
+}
+
+.book::before,
+.book::after {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  width: 3.2rem;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 223, 184, 0.16), transparent 14%, rgba(33, 16, 8, 0.32) 100%),
+    linear-gradient(180deg, #7e522f, #5a351d);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 243, 223, 0.22),
+    inset 0 -10px 20px rgba(39, 19, 8, 0.25);
+}
+
+.book::before {
+  left: 0.8rem;
+}
+
+.book::after {
+  right: 0.8rem;
+}
+
+.bookSpine {
+  position: absolute;
+  left: 4rem;
+  top: 2rem;
+  bottom: 2rem;
+  width: 1.2rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 231, 197, 0.42), rgba(77, 45, 20, 0.2) 28%, rgba(32, 16, 8, 0.5) 100%);
+  opacity: 0.8;
+}
+
+.corner {
+  position: absolute;
+  width: 92px;
+  height: 92px;
+  border-radius: 30px;
+  background:
+    linear-gradient(145deg, rgba(255, 226, 188, 0.26), rgba(59, 33, 17, 0.08) 35%, rgba(34, 18, 9, 0.42) 100%),
+    linear-gradient(180deg, #6f4522, #4c2b18);
+  box-shadow: inset 0 1px 0 rgba(255, 240, 215, 0.24);
+}
+
+.cornerTopLeft {
+  left: 0.9rem;
+  top: 0.9rem;
+}
+
+.cornerTopRight {
+  right: 0.9rem;
+  top: 0.9rem;
+}
+
+.cornerBottomLeft {
+  left: 0.9rem;
+  bottom: 0.9rem;
+}
+
+.cornerBottomRight {
+  right: 0.9rem;
+  bottom: 0.9rem;
+}
+
+.paper {
+  position: relative;
+  z-index: 2;
+  width: min(860px, 100%);
+  min-height: 720px;
+  border-radius: 26px;
+  padding: 3.5rem 4rem 4rem 5.3rem;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.22) 35%, transparent 40%),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 33px,
+      rgba(124, 158, 190, 0.14) 33px,
+      rgba(124, 158, 190, 0.14) 34px
+    ),
+    linear-gradient(180deg, #fffdf8 0%, #fffaf0 100%);
+  box-shadow:
+    0 18px 40px rgba(49, 31, 18, 0.22),
+    inset 0 0 0 1px rgba(187, 161, 131, 0.18),
+    inset 0 0 80px rgba(208, 194, 169, 0.18);
+}
+
+.paper::before,
+.paper::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.paper::before {
+  top: 2.4rem;
+  bottom: 2.4rem;
+  left: 2.75rem;
+  width: 2px;
+  background: rgba(217, 96, 96, 0.38);
+}
+
+.paper::after {
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(132, 84, 35, 0.05), transparent 20%),
+    radial-gradient(circle at 85% 60%, rgba(132, 84, 35, 0.05), transparent 18%),
+    radial-gradient(circle at 50% 90%, rgba(132, 84, 35, 0.04), transparent 16%);
+  mix-blend-mode: multiply;
+  opacity: 0.65;
+}
+
+.paperHeader {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.paperEyebrow {
+  font-family: var(--font-display), var(--font-serif), serif;
+  font-size: clamp(1.8rem, 3vw, 2.9rem);
+  letter-spacing: 0.08em;
+  color: #5a3d24;
+}
+
+.paperTitle {
+  max-width: 14ch;
+  font-family: var(--font-serif), serif;
+  font-size: clamp(2.6rem, 5vw, 4.9rem);
+  font-weight: 600;
+  line-height: 0.95;
+  text-wrap: balance;
+  color: #2b180d;
+}
+
+.dateZone {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.dateLabel {
+  min-height: 3rem;
+  font-family: var(--font-hand), var(--font-serif), serif;
+  font-size: clamp(2.2rem, 5vw, 3.9rem);
+  line-height: 1;
+  color: #48301f;
+  text-transform: capitalize;
+  text-wrap: balance;
+}
+
+.workLabel {
+  position: relative;
+  font-family: var(--font-hand), var(--font-serif), serif;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  color: #724826;
+}
+
+.workLabel::before,
+.workLabel::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: clamp(4rem, 18vw, 9rem);
+  height: 1px;
+  background: rgba(104, 78, 56, 0.25);
+}
+
+.workLabel::before {
+  right: calc(100% + 1rem);
+}
+
+.workLabel::after {
+  left: calc(100% + 1rem);
+}
+
+.introduction,
+.detailsSection {
+  margin-top: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.sectionTitle {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(1.55rem, 3vw, 2.4rem);
+  font-weight: 600;
+  color: #392416;
+}
+
+.introText,
+.detailsLead,
+.detailValue,
+.modalDescription,
+.modalHandle,
+.telegramHandle,
+.spotifyArtist,
+.spotifyProgressLabels,
+.modalEyebrow {
+  font-family: var(--font-reading), var(--font-serif), serif;
+}
+
+.introText {
+  margin-top: 1rem;
+  font-size: clamp(1.1rem, 2.1vw, 1.35rem);
+  line-height: 1.8;
+  color: #453124;
+  text-wrap: pretty;
+}
+
+.detailsHeader {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.detailsLead {
+  max-width: 48ch;
+  color: #6a4f38;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.detailsGrid {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.detailCard {
+  min-width: 0;
+  border-radius: 22px;
+  padding: 1.25rem 1.3rem 1.4rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 248, 235, 0.64)),
+    linear-gradient(180deg, rgba(117, 77, 44, 0.08), rgba(255, 255, 255, 0.2));
+  box-shadow:
+    inset 0 0 0 1px rgba(161, 125, 92, 0.14),
+    0 12px 26px rgba(84, 56, 33, 0.07);
+}
+
+.detailLabel {
+  font-size: 0.84rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8a6240;
+}
+
+.detailValue {
+  margin-top: 0.65rem;
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: #301f14;
+  overflow-wrap: anywhere;
+}
+
+.tabRail {
+  position: absolute;
+  top: 6.75rem;
+  display: grid;
+  gap: 0.75rem;
+  z-index: 3;
+}
+
+.tabRailLeft {
+  left: -1.35rem;
+}
+
+.tabRailRight {
+  right: -1.35rem;
+}
+
+.tabButton {
+  min-height: 10.2rem;
+  width: 3.9rem;
+  border: 0;
+  border-radius: 1.15rem 1.15rem 0.9rem 0.9rem;
+  padding: 1rem 0.7rem;
+  display: grid;
+  place-items: center;
+  box-shadow:
+    0 10px 18px rgba(26, 12, 6, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: translateX(0) translateY(calc(var(--tab-index) * 6px));
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    filter 220ms ease;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.tabButton:hover {
+  transform: translateX(0.2rem) translateY(calc(var(--tab-index) * 6px - 4px));
+  box-shadow:
+    0 16px 26px rgba(26, 12, 6, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.tabButton:focus-visible,
+.modalAction:focus-visible,
+.closeButton:focus-visible {
+  outline: 2px solid #fffaf0;
+  outline-offset: 4px;
+}
+
+.tabLabel {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-display), var(--font-serif), serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  color: #fffef8;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.tabPlaceholder {
+  pointer-events: none;
+}
+
+.tabSpotify {
+  background: linear-gradient(180deg, #2fcc68 0%, #159946 100%);
+}
+
+.tabTelegram {
+  background: linear-gradient(180deg, #59b7ff 0%, #1e85f3 100%);
+}
+
+.tabDiscord {
+  background: linear-gradient(180deg, #7c8eff 0%, #5663f0 100%);
+}
+
+.tabInstagram {
+  background: linear-gradient(180deg, #ff6aa2 0%, #cc3f8c 48%, #7b39d1 100%);
+}
+
+.tabReddit {
+  background: linear-gradient(180deg, #ff7e41 0%, #f04a16 100%);
+}
+
+.tabGithub {
+  background: linear-gradient(180deg, #4b4b5d 0%, #17181f 100%);
+}
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding:
+    max(1.25rem, env(safe-area-inset-top))
+    max(1rem, env(safe-area-inset-right))
+    max(1.25rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+  background: rgba(24, 14, 8, 0.62);
+  backdrop-filter: blur(18px);
+  overscroll-behavior: contain;
+  animation: fadeIn 220ms ease;
+}
+
+.modalPanel {
+  position: relative;
+  width: min(760px, 100%);
+  border-radius: 34px;
+  padding: 2rem;
+  color: #fffef8;
+  box-shadow:
+    0 30px 70px rgba(9, 9, 9, 0.42),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  animation: panelIn 280ms cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+.modalPanel::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.panelSpotify {
+  background:
+    radial-gradient(circle at top left, rgba(52, 255, 111, 0.22), transparent 36%),
+    linear-gradient(180deg, #111513 0%, #0b0d0c 100%);
+}
+
+.panelTelegram {
+  background:
+    radial-gradient(circle at top right, rgba(180, 224, 255, 0.26), transparent 34%),
+    linear-gradient(180deg, #1f7ed8 0%, #2e99ff 52%, #ecf7ff 52%, #dbeeff 100%);
+  color: #113257;
+}
+
+.panelDiscord {
+  background:
+    radial-gradient(circle at top left, rgba(136, 158, 255, 0.32), transparent 34%),
+    linear-gradient(160deg, #242843 0%, #1b1e35 100%);
+}
+
+.panelReddit {
+  background:
+    radial-gradient(circle at top left, rgba(255, 159, 108, 0.24), transparent 30%),
+    linear-gradient(160deg, #432114 0%, #1f120d 100%);
+}
+
+.panelInstagram {
+  background:
+    radial-gradient(circle at top left, rgba(255, 147, 202, 0.3), transparent 36%),
+    linear-gradient(135deg, #563ad0 0%, #8a3ab9 38%, #e23b79 70%, #f69339 100%);
+}
+
+.panelGithub {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.1), transparent 34%),
+    linear-gradient(160deg, #23242d 0%, #101115 100%);
+}
+
+.closeButton {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.12);
+  color: currentColor;
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease;
+  touch-action: manipulation;
+}
+
+.closeButton:hover {
+  transform: scale(1.03);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.modalHeader,
+.telegramHero {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modalBadge,
+.telegramLogoBadge {
+  flex: none;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1.4rem;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.telegramLogoBadge {
+  margin-left: auto;
+  background: rgba(17, 50, 87, 0.08);
+}
+
+.modalBadge svg,
+.telegramLogoBadge svg {
+  width: 2.1rem;
+  height: 2.1rem;
+}
+
+.modalHeading {
+  min-width: 0;
+}
+
+.modalEyebrow {
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.modalTitle {
+  margin-top: 0.2rem;
+  font-family: var(--font-serif), serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+.modalHandle,
+.telegramHandle {
+  margin-top: 0.35rem;
+  font-size: 1rem;
+  opacity: 0.84;
+  overflow-wrap: anywhere;
+}
+
+.modalDescription {
+  margin-top: 1.2rem;
+  font-size: 1.08rem;
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+.telegramAvatar {
+  flex: none;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 1.8rem;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #ffffff, #d5ecff);
+  color: #1e5da1;
+  font-family: var(--font-display), var(--font-serif), serif;
+  font-size: 2.2rem;
+}
+
+.telegramMeta {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.modalActions {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.modalAction {
+  min-width: 0;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.9rem 1.2rem;
+  background: rgba(255, 255, 255, 0.16);
+  color: inherit;
+  font-family: var(--font-reading), var(--font-serif), serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease;
+  touch-action: manipulation;
+}
+
+.modalAction:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.modalActionGhost {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.copyStatus {
+  min-height: 1.6rem;
+  margin-top: 0.9rem;
+  font-family: var(--font-reading), var(--font-serif), serif;
+  font-size: 0.95rem;
+  opacity: 0.84;
+}
+
+.spotifyExperience {
+  margin-top: 1.4rem;
+  display: grid;
+  gap: 1.4rem;
+}
+
+.spotifyHero {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 148px minmax(0, 1fr);
+  align-items: end;
+}
+
+.spotifyAlbumArt {
+  aspect-ratio: 1;
+  border-radius: 26px;
+  display: grid;
+  place-items: center;
+  gap: 0.3rem;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.18), transparent 26%),
+    linear-gradient(145deg, #185a2c 0%, #0d0f0e 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 18px 34px rgba(0, 0, 0, 0.28);
+  font-family: var(--font-display), var(--font-serif), serif;
+  font-size: 2.1rem;
+}
+
+.spotifyMeta {
+  min-width: 0;
+}
+
+.spotifyEyebrow {
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.64);
+}
+
+.spotifyTitle {
+  margin-top: 0.35rem;
+  font-family: var(--font-serif), serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+.spotifyArtist {
+  margin-top: 0.55rem;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.spotifyProgressGroup {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.spotifyProgressBar {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  overflow: hidden;
+}
+
+.spotifyProgressFill {
+  display: block;
+  width: 72%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #1ed760, #c3ffd5);
+}
+
+.spotifyProgressLabels {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.94rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.spotifyEmbed {
+  border: 0;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.loadingState {
+  min-height: 240px;
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--font-reading), var(--font-serif), serif;
+  font-size: 1.02rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 980px) {
+  .book {
+    padding: 5.5rem 2rem 7.25rem;
+  }
+
+  .bookSpine {
+    left: 2rem;
+  }
+
+  .paper {
+    padding: 3rem 2rem 2.5rem 3.2rem;
+  }
+
+  .paper::before {
+    left: 1.7rem;
+  }
+
+  .detailsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tabRail {
+    top: auto;
+    bottom: 1rem;
+    width: calc(100% - 7rem);
+    grid-auto-flow: column;
+    justify-content: center;
+  }
+
+  .tabRailLeft {
+    left: 3.5rem;
+  }
+
+  .tabRailRight {
+    right: 3.5rem;
+  }
+
+  .tabButton {
+    min-height: auto;
+    width: 100%;
+    min-width: 5.4rem;
+    height: 3.45rem;
+    border-radius: 999px;
+    padding: 0.8rem 1rem;
+    transform: translateY(0);
+  }
+
+  .tabButton:hover {
+    transform: translateY(-2px);
+  }
+
+  .tabLabel {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .stage {
+    align-items: start;
+  }
+
+  .book {
+    min-height: auto;
+    padding: 4.75rem 1rem 6.5rem;
+    border-radius: 28px;
+  }
+
+  .book::before,
+  .book::after {
+    width: 1.4rem;
+  }
+
+  .corner {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+  }
+
+  .paper {
+    border-radius: 22px;
+    padding: 2.35rem 1.2rem 2.2rem 2.1rem;
+  }
+
+  .paper::before {
+    left: 1rem;
+  }
+
+  .introText,
+  .detailValue,
+  .modalDescription {
+    font-size: 1rem;
+  }
+
+  .modalPanel {
+    padding: 1.5rem 1rem 1.1rem;
+    border-radius: 26px;
+  }
+
+  .modalHeader,
+  .telegramHero,
+  .spotifyHero {
+    grid-template-columns: 1fr;
+    display: grid;
+    align-items: start;
+  }
+
+  .telegramLogoBadge {
+    margin-left: 0;
+  }
+
+  .spotifyAlbumArt {
+    max-width: 148px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skipLink,
+  .tabButton,
+  .closeButton,
+  .modalAction,
+  .modalBackdrop,
+  .modalPanel {
+    transition: none;
+    animation: none;
+  }
+
+  .tabButton:hover,
+  .closeButton:hover,
+  .modalAction:hover {
+    transform: none;
+  }
+}
